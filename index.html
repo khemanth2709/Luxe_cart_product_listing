@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxeCart | Premium E-Commerce</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛍️</text></svg>">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo" onclick="window.location.href='#'">
+                    <i class="fas fa-crown"></i>
+                    <h1>LuxeCart</h1>
+                    <span class="tagline">Premium Collection</span>
+                </div>
+
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search for products, brands and more...">
+                    <button class="search-btn">Search</button>
+                </div>
+
+                <div class="header-actions">
+                    <button class="header-action-btn" id="wishlistBtn">
+                        <i class="far fa-heart"></i>
+                        <span class="action-label">Wishlist</span>
+                        <span class="action-count" id="wishlistCount">0</span>
+                    </button>
+
+                    <button class="header-action-btn" id="cartBtn">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span class="action-label">Cart</span>
+                        <span class="action-count" id="cartCount">0</span>
+                    </button>
+
+                    <button class="header-action-btn" id="ordersBtn">
+                        <i class="fas fa-box-open"></i>
+                        <span class="action-label">Orders</span>
+                    </button>
+
+                    <button class="header-action-btn" id="accountBtn">
+                        <i class="far fa-user"></i>
+                        <span class="action-label">Account</span>
+                    </button>
+                </div>
+
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-header">
+            <h3>Menu</h3>
+            <button class="close-mobile-nav" id="closeMobileNav">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="mobile-nav-content">
+            <a href="#" class="mobile-nav-item">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="#" class="mobile-nav-item">
+                <i class="fas fa-box-open"></i>
+                <span>My Orders</span>
+            </a>
+            <a href="#" class="mobile-nav-item">
+                <i class="far fa-heart"></i>
+                <span>Wishlist</span>
+                <span class="mobile-count" id="mobileWishlistCount">0</span>
+            </a>
+            <a href="#" class="mobile-nav-item">
+                <i class="fas fa-shopping-bag"></i>
+                <span>Cart</span>
+                <span class="mobile-count" id="mobileCartCount">0</span>
+            </a>
+            <a href="#" class="mobile-nav-item">
+                <i class="far fa-user"></i>
+                <span>Account</span>
+            </a>
+            <div class="mobile-categories">
+                <h4>Categories</h4>
+                <button class="mobile-category" data-category="all">All Products</button>
+                <button class="mobile-category" data-category="Electronics">Electronics</button>
+                <button class="mobile-category" data-category="Fashion">Fashion</button>
+                <button class="mobile-category" data-category="Home">Home & Living</button>
+                <button class="mobile-category" data-category="Accessories">Accessories</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container main-container">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb">
+            <a href="#">Home</a>
+            <i class="fas fa-chevron-right"></i>
+            <span>All Products</span>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="page-title-section">
+                <h2>Premium Collection</h2>
+                <p class="page-subtitle">Discover our curated selection of premium products</p>
+            </div>
+            <div class="page-actions">
+                <div class="results-info">
+                    <span id="resultsCount">40</span> products
+                </div>
+                <button class="mobile-filter-toggle" id="mobileFilterToggle">
+                    <i class="fas fa-filter"></i>
+                    <span>Filter & Sort</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+            <!-- Filters Sidebar -->
+            <aside class="filters-sidebar" id="filtersSidebar">
+                <div class="filters-header">
+                    <h3><i class="fas fa-sliders-h"></i> Filters</h3>
+                    <button class="reset-filters" id="resetFilters">
+                        <i class="fas fa-redo"></i> Reset All
+                    </button>
+                </div>
+
+                <!-- Search Filter -->
+                <div class="filter-section">
+                    <h4 class="filter-title">
+                        <i class="fas fa-search"></i> Search
+                    </h4>
+                    <div class="search-filter">
+                        <input type="text" id="filterSearch" placeholder="Search products...">
+                    </div>
+                </div>
+
+                <!-- Category Filter -->
+                <div class="filter-section">
+                    <h4 class="filter-title">
+                        <i class="fas fa-tags"></i> Category
+                    </h4>
+                    <div class="filter-options" id="categoryFilter">
+                        <div class="filter-option">
+                            <input type="checkbox" id="electronics" value="Electronics">
+                            <label for="electronics">
+                                <span class="filter-label">Electronics</span>
+                                <span class="filter-count">(10)</span>
+                            </label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="fashion" value="Fashion">
+                            <label for="fashion">
+                                <span class="filter-label">Fashion</span>
+                                <span class="filter-count">(10)</span>
+                            </label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="home" value="Home">
+                            <label for="home">
+                                <span class="filter-label">Home & Living</span>
+                                <span class="filter-count">(10)</span>
+                            </label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="accessories" value="Accessories">
+                            <label for="accessories">
+                                <span class="filter-label">Accessories</span>
+                                <span class="filter-count">(10)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Price Filter -->
+                <div class="filter-section">
+                    <h4 class="filter-title">
+                        <i class="fas fa-indian-rupee-sign"></i> Price Range
+                    </h4>
+                    <div class="price-filter">
+                        <div class="price-inputs">
+                            <div class="input-group">
+                                <label for="minPrice">Min</label>
+                                <div class="price-input-wrapper">
+                                    <span class="currency">₹</span>
+                                    <input type="number" id="minPrice" min="0" max="500000" value="0">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label for="maxPrice">Max</label>
+                                <div class="price-input-wrapper">
+                                    <span class="currency">₹</span>
+                                    <input type="number" id="maxPrice" min="0" max="500000" value="500000">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="price-slider-container">
+                            <div class="price-slider">
+                                <div class="slider-track"></div>
+                                <input type="range" min="0" max="500000" value="0" class="range-min" id="priceRangeMin">
+                                <input type="range" min="0" max="500000" value="500000" class="range-max" id="priceRangeMax">
+                            </div>
+                            <div class="price-values">
+                                <span>₹0</span>
+                                <span>₹5,00,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rating Filter -->
+                <div class="filter-section">
+                    <h4 class="filter-title">
+                        <i class="fas fa-star"></i> Customer Rating
+                    </h4>
+                    <div class="filter-options" id="ratingFilter">
+                        <div class="filter-option">
+                            <input type="radio" name="rating" id="ratingAll" value="0" checked>
+                            <label for="ratingAll">All Ratings</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="radio" name="rating" id="rating45" value="4.5">
+                            <label for="rating45">
+                                <span class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </span>
+                                4.5 & above
+                            </label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="radio" name="rating" id="rating4" value="4">
+                            <label for="rating4">
+                                <span class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </span>
+                                4★ & above
+                            </label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="radio" name="rating" id="rating3" value="3">
+                            <label for="rating3">
+                                <span class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </span>
+                                3★ & above
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stock Filter -->
+                <div class="filter-section">
+                    <h4 class="filter-title">
+                        <i class="fas fa-check-circle"></i> Availability
+                    </h4>
+                    <div class="filter-options">
+                        <div class="filter-option">
+                            <input type="checkbox" id="inStock" checked>
+                            <label for="inStock">In Stock Only</label>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <div class="main-content">
+                <!-- Sorting and Active Filters Bar -->
+                <div class="controls-bar">
+                    <div class="sorting-controls">
+                        <span class="sort-label">Sort by:</span>
+                        <select id="sortSelect">
+                            <option value="recommended">Recommended</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="rating-high">Rating: High to Low</option>
+                            <option value="name-asc">Name: A to Z</option>
+                            <option value="name-desc">Name: Z to A</option>
+                        </select>
+                    </div>
+
+                    <div class="active-filters" id="activeFilters">
+                        <!-- Active filters will be dynamically added here -->
+                    </div>
+                </div>
+
+                <!-- Products Grid -->
+                <div class="products-grid" id="productsGrid">
+                    <!-- Products will be dynamically inserted here -->
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination" id="pagination">
+                    <button class="pagination-btn prev" id="prevPage" disabled>
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </button>
+                    <div class="pagination-numbers" id="paginationNumbers">
+                        <!-- Page numbers will be dynamically inserted here -->
+                    </div>
+                    <button class="pagination-btn next" id="nextPage">
+                        Next <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <!-- Empty State -->
+                <div class="empty-state" id="emptyState" style="display: none;">
+                    <div class="empty-state-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>No products found</h3>
+                    <p>Try adjusting your filters or search term to find what you're looking for.</p>
+                    <button class="reset-filters" id="resetFiltersEmpty">
+                        <i class="fas fa-redo"></i> Reset All Filters
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-crown"></i>
+                        <h3>LuxeCart</h3>
+                    </div>
+                    <p class="footer-description">
+                        Premium e-commerce experience with curated collections and exceptional quality.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Shop</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">All Products</a></li>
+                        <li><a href="#">New Arrivals</a></li>
+                        <li><a href="#">Best Sellers</a></li>
+                        <li><a href="#">Sale</a></li>
+                        <li><a href="#">Gift Cards</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Information</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Return Policy</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Premium Street, Mumbai 400001</p>
+                        <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+                        <p><i class="fas fa-envelope"></i> support@luxecart.com</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2023 LuxeCart. All rights reserved.</p>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-amex"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                    <i class="fas fa-university"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Product Detail Modal -->
+    <div class="modal-overlay" id="productModalOverlay" style="display: none;">
+        <div class="modal product-modal" id="productModal">
+            <button class="modal-close" id="closeProductModal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="product-modal-content" id="productModalContent">
+                <!-- Product detail content will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="modal-overlay" id="cartModalOverlay" style="display: none;">
+        <div class="modal cart-modal" id="cartModal">
+            <button class="modal-close" id="closeCartModal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="cart-modal-header">
+                <h3><i class="fas fa-shopping-bag"></i> Your Shopping Cart</h3>
+                <span class="cart-items-count" id="cartModalCount">0 items</span>
+            </div>
+            <div class="cart-modal-content" id="cartModalContent">
+                <!-- Cart items will be dynamically inserted here -->
+            </div>
+            <div class="cart-modal-footer">
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <span class="cart-total-amount" id="cartTotalAmount">₹0</span>
+                </div>
+                <div class="cart-actions">
+                    <button class="btn-secondary" id="continueShopping">Continue Shopping</button>
+                    <button class="btn-primary" id="proceedCheckout">Proceed to Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wishlist Modal -->
+    <div class="modal-overlay" id="wishlistModalOverlay" style="display: none;">
+        <div class="modal wishlist-modal" id="wishlistModal">
+            <button class="modal-close" id="closeWishlistModal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="wishlist-modal-header">
+                <h3><i class="far fa-heart"></i> Your Wishlist</h3>
+                <span class="wishlist-items-count" id="wishlistModalCount">0 items</span>
+            </div>
+            <div class="wishlist-modal-content" id="wishlistModalContent">
+                <!-- Wishlist items will be dynamically inserted here -->
+            </div>
+            <div class="wishlist-modal-footer">
+                <button class="btn-secondary" id="closeWishlistBtn">Close</button>
+                <button class="btn-primary" id="viewAllWishlist">View All</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Orders Modal -->
+    <div class="modal-overlay" id="ordersModalOverlay" style="display: none;">
+        <div class="modal orders-modal" id="ordersModal">
+            <button class="modal-close" id="closeOrdersModal">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="orders-modal-header">
+                <h3><i class="fas fa-box-open"></i> Order History</h3>
+            </div>
+            <div class="orders-modal-content" id="ordersModalContent">
+                <!-- Order history will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Filter Modal -->
+    <div class="modal-overlay" id="mobileFilterOverlay" style="display: none;">
+        <div class="modal mobile-filter-modal" id="mobileFilterModal">
+            <div class="mobile-filter-header">
+                <h3>Filter & Sort</h3>
+                <button class="modal-close" id="closeMobileFilterModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="mobile-filter-content" id="mobileFilterContent">
+                <!-- Mobile filter content will be inserted here -->
+            </div>
+            <div class="mobile-filter-footer">
+                <button class="btn-secondary" id="clearMobileFilters">Clear All</button>
+                <button class="btn-primary" id="applyMobileFilters">Apply Filters</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Page (Hidden by default) -->
+    <div class="checkout-page" id="checkoutPage" style="display: none;">
+        <div class="container">
+            <div class="checkout-header">
+                <button class="back-to-shop" id="backToShop">
+                    <i class="fas fa-arrow-left"></i> Back to Shop
+                </button>
+                <h2>Checkout</h2>
+                <div class="checkout-steps">
+                    <div class="checkout-step active">
+                        <span class="step-number">1</span>
+                        <span class="step-label">Cart</span>
+                    </div>
+                    <div class="checkout-step">
+                        <span class="step-number">2</span>
+                        <span class="step-label">Information</span>
+                    </div>
+                    <div class="checkout-step">
+                        <span class="step-number">3</span>
+                        <span class="step-label">Payment</span>
+                    </div>
+                    <div class="checkout-step">
+                        <span class="step-number">4</span>
+                        <span class="step-label">Confirmation</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="checkout-content">
+                <div class="checkout-form-section">
+                    <div class="checkout-section">
+                        <h3><i class="fas fa-shipping-fast"></i> Shipping Information</h3>
+                        <div class="form-group">
+                            <label for="fullName">Full Name *</label>
+                            <input type="text" id="fullName" placeholder="Enter your full name">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" placeholder="Enter your email">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" placeholder="Enter your phone number">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Shipping Address *</label>
+                            <textarea id="address" rows="3" placeholder="Enter your complete address"></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city">City *</label>
+                                <input type="text" id="city" placeholder="Enter your city">
+                            </div>
+                            <div class="form-group">
+                                <label for="state">State *</label>
+                                <input type="text" id="state" placeholder="Enter your state">
+                            </div>
+                            <div class="form-group">
+                                <label for="pincode">PIN Code *</label>
+                                <input type="text" id="pincode" placeholder="Enter PIN code">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="checkout-section">
+                        <h3><i class="fas fa-credit-card"></i> Payment Method</h3>
+                        <div class="payment-methods-selector">
+                            <div class="payment-method">
+                                <input type="radio" name="paymentMethod" id="paymentUpi" value="upi" checked>
+                                <label for="paymentUpi">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    <span>UPI Payment</span>
+                                </label>
+                            </div>
+                            <div class="payment-method">
+                                <input type="radio" name="paymentMethod" id="paymentCard" value="card">
+                                <label for="paymentCard">
+                                    <i class="far fa-credit-card"></i>
+                                    <span>Credit/Debit Card</span>
+                                </label>
+                            </div>
+                            <div class="payment-method">
+                                <input type="radio" name="paymentMethod" id="paymentNetbanking" value="netbanking">
+                                <label for="paymentNetbanking">
+                                    <i class="fas fa-university"></i>
+                                    <span>Net Banking</span>
+                                </label>
+                            </div>
+                            <div class="payment-method">
+                                <input type="radio" name="paymentMethod" id="paymentCod" value="cod">
+                                <label for="paymentCod">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                    <span>Cash on Delivery</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- UPI Payment Details -->
+                        <div class="payment-details" id="upiDetails" style="display: block;">
+                            <div class="payment-instruction">
+                                <p>Scan the QR code below or enter UPI ID to complete payment</p>
+                                <div class="upi-qr-code">
+                                    <div class="qr-placeholder">
+                                        <i class="fas fa-qrcode"></i>
+                                        <span>UPI QR Code</span>
+                                    </div>
+                                </div>
+                                <div class="upi-id">
+                                    <label>UPI ID:</label>
+                                    <div class="upi-id-display">luxecart@upi</div>
+                                    <button class="copy-upi-btn">
+                                        <i class="far fa-copy"></i> Copy
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card Payment Details -->
+                        <div class="payment-details" id="cardDetails" style="display: none;">
+                            <div class="form-group">
+                                <label for="cardNumber">Card Number *</label>
+                                <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="cardExpiry">Expiry Date *</label>
+                                    <input type="text" id="cardExpiry" placeholder="MM/YY">
+                                </div>
+                                <div class="form-group">
+                                    <label for="cardCvv">CVV *</label>
+                                    <input type="text" id="cardCvv" placeholder="123">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="cardName">Name on Card *</label>
+                                <input type="text" id="cardName" placeholder="Enter name as on card">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="checkout-summary-section">
+                    <div class="order-summary">
+                        <h3>Order Summary</h3>
+                        <div class="summary-items" id="checkoutSummaryItems">
+                            <!-- Order items will be dynamically inserted here -->
+                        </div>
+                        <div class="summary-totals">
+                            <div class="summary-row">
+                                <span>Subtotal</span>
+                                <span id="checkoutSubtotal">₹0</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Shipping</span>
+                                <span>₹99</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Tax (18%)</span>
+                                <span id="checkoutTax">₹0</span>
+                            </div>
+                            <div class="summary-row total">
+                                <span>Total</span>
+                                <span id="checkoutTotal">₹0</span>
+                            </div>
+                        </div>
+                        <button class="btn-primary btn-place-order" id="placeOrderBtn">
+                            <i class="fas fa-lock"></i> Place Order
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Success Page (Hidden by default) -->
+    <div class="order-success-page" id="orderSuccessPage" style="display: none;">
+        <div class="container">
+            <div class="success-content">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2>Order Confirmed!</h2>
+                <p class="success-message">Thank you for your purchase. Your order has been confirmed and will be shipped soon.</p>
+
+                <div class="order-details-card">
+                    <h3><i class="fas fa-receipt"></i> Order Details</h3>
+                    <div class="order-info">
+                        <div class="order-info-item">
+                            <span class="label">Order ID:</span>
+                            <span class="value" id="successOrderId">#LC-2023-001</span>
+                        </div>
+                        <div class="order-info-item">
+                            <span class="label">Date:</span>
+                            <span class="value" id="successOrderDate">Nov 15, 2023</span>
+                        </div>
+                        <div class="order-info-item">
+                            <span class="label">Total Amount:</span>
+                            <span class="value" id="successOrderAmount">₹0</span>
+                        </div>
+                        <div class="order-info-item">
+                            <span class="label">Payment Method:</span>
+                            <span class="value" id="successPaymentMethod">UPI</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="success-actions">
+                    <button class="btn-secondary" id="viewOrderDetails">
+                        <i class="fas fa-eye"></i> View Order Details
+                    </button>
+                    <button class="btn-primary" id="continueShoppingSuccess">
+                        <i class="fas fa-shopping-bag"></i> Continue Shopping
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
